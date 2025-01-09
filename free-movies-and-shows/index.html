@@ -1,68 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Movies/Shows</title>
-<style>
-  body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-  iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #101010;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 3em;
+            margin-top: 50px;
+            color: #ff6f61;
+            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.5);
+        }
+        a {
+            display: inline-block;
+            font-size: 1.5em;
+            margin: 20px;
+            padding: 15px 30px;
+            text-decoration: none;
+            background-color: #ff6f61;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        a:hover {
+            transform: scale(1.1);
+            background-color: #ff4040;
+        }
+        a:active {
+            transform: scale(1);
+            background-color: #d9534f;
+        }
+    </style>
 </head>
 <body>
-
-<button onclick="toggleFullScreen()">Toggle Fullscreen</button>
-<input type="text" placeholder="Access Code" id="acc">
-<p>If all of the servers are blocking it because of "embed" or "sandbox iframe"</p><a href="nonsandbox_iframe.html"> click here</a>
-<iframe id="iframe" src="" sandbox="allow-scripts allow-same-origin"></iframe>
-
-<script>
-  // Block window.open to prevent popups
-  window.open = function() { return null; };
-
-  // Disable target="_blank" behavior in the iframe
-  document.addEventListener('click', function(event) {
-    if (event.target.tagName === 'A' && event.target.target === '_blank') {
-      event.preventDefault();
-      console.log('Blocked a link trying to open in a new tab');
-    }
-  }, true);
-
-  // Check if access was previously granted
-  if (localStorage.getItem("access")) {
-    document.getElementById("iframe").setAttribute("src", "https://web.netmovies.to");
-  }
-
-  // Fullscreen toggle function
-  function toggleFullScreen() {
-    var iframe = document.getElementById("iframe");
-    if (!document.fullscreenElement) {
-      iframe.requestFullscreen().catch(err => {
-        alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-      });
-    } else {
-      document.exitFullscreen();
-    }
-  }
-
-  // Access code input event listener
-  document.getElementById("acc").addEventListener("change", () => {
-    if (document.getElementById("acc").value === "WATCHNOW123") {
-      iframe.setAttribute("src", "https://web.netmovies.to");
-      localStorage.setItem("access", true);
-    }
-  });
-</script>
-
+    <h1>Streaming Platforms</h1>
+    <a href="fmovies.html">FMovies</a>
+    <a href="netmovies.html">NetMovies</a>
 </body>
 </html>
