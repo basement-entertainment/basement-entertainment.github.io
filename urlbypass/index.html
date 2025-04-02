@@ -51,12 +51,11 @@ function loadURL() {
 }
 
 function executeScript() {
-  var iframe = document.getElementById("iframe");
   var jsCode = document.getElementById("jsCode").value;
   var outputDiv = document.getElementById("output");
   
   try {
-    var result = iframe.contentWindow.eval(jsCode);
+    var result = eval(jsCode); // Execute JavaScript in the parent document
     outputDiv.innerText = "Output: " + result;
   } catch (e) {
     outputDiv.innerText = "Error: " + e.message;
