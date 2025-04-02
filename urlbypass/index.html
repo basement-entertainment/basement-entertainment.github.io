@@ -50,13 +50,13 @@ function loadURL() {
   iframe.setAttribute("src", url);
 }
 
-function executeScript() {
+async function executeScript() {
   var jsCode = document.getElementById("jsCode").value;
   var outputDiv = document.getElementById("output");
   
   try {
-    var result = eval(jsCode); // Execute JavaScript in the parent document
-    outputDiv.innerText = "Output: " + result;
+    let result = await eval(`(async () => { ${jsCode} })()`);
+    outputDiv.innerText = "Output: " + (result !== undefined ? JSON.stringify(result, null, 2) : "No output");
   } catch (e) {
     outputDiv.innerText = "Error: " + e.message;
   }
