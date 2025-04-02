@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>URL Bypass</title>
+<title>URL Bypass with JavaScript</title>
 <style>
   body, html {
     margin: 0;
@@ -11,31 +11,48 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
-  embed {
+  iframe {
+    flex-grow: 1;
     width: 100%;
-    height: 100%;
+    border: none;
+  }
+  textarea {
+    width: 100%;
+    height: 100px;
   }
 </style>
 </head>
 <body>
 
 <input id="url" type="text" placeholder="Enter URL">
+<button onclick="loadURL()">Load URL</button>
+<button onclick="executeScript()">Run JavaScript</button>
 <button onclick="toggleFullScreen()">Toggle Fullscreen</button>
-<embed id="embed" src="" type="text/html">
+<textarea id="jsCode" placeholder="Enter JavaScript code"></textarea>
+<iframe id="iframe"></iframe>
 
 <script>
-document.getElementById("url").addEventListener("change", function() {
-  var embed = document.getElementById("embed");
+function loadURL() {
+  var iframe = document.getElementById("iframe");
   var url = document.getElementById("url").value;
-  embed.setAttribute("src", url);
-});
+  iframe.setAttribute("src", url);
+}
+
+function executeScript() {
+  var iframe = document.getElementById("iframe");
+  var jsCode = document.getElementById("jsCode").value;
+  
+  iframe.contentWindow.eval(jsCode);
+}
 
 function toggleFullScreen() {
-  var embed = document.getElementById("embed");
+  var iframe = document.getElementById("iframe");
   
   if (!document.fullscreenElement) {
-    embed.requestFullscreen().catch(err => {
+    iframe.requestFullscreen().catch(err => {
       alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
     });
   } else {
