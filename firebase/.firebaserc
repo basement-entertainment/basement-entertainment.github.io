@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "proxypinterest"
-  }
+    "default": "proxypinterest",
+    "proxypinterest": "proxypinterest"
+  },
+  "targets": {},
+  "etags": {}
 }
